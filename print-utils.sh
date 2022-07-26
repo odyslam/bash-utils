@@ -3,13 +3,10 @@
 TPUT_RESET=""
 TPUT_WHITE=""
 TPUT_BGRED=""
-# shellcheck disable=SC2034
 TPUT_RED=""
-# shellcheck disable=SC2034
 TPUT_GREEN=""
 TPUT_BGGREEN=""
 TPUT_BOLD=""
-# shellcheck disable=SC2034
 TPUT_DIM=""
 
 # Is stderr on the terminal? If not, then fail
@@ -22,9 +19,12 @@ if command -v tput > /dev/null 2>&1; then
     TPUT_WHITE="$(tput setaf 7)"
     TPUT_BGRED="$(tput setab 1)"
     TPUT_BGGREEN="$(tput setab 2)"
+# shellcheck disable=SC2034
     TPUT_GREEN="$(tput setaf 2)"
+# shellcheck disable=SC2034
     TPUT_RED="$(tput setaf 1)"
     TPUT_BOLD="$(tput bold)"
+# shellcheck disable=SC2034
     TPUT_DIM="$(tput dim)"
   fi
 fi
