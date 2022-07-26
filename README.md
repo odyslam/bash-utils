@@ -10,7 +10,7 @@ Useful util scripts for Bash
 
 **Generate**
 
-```
+```bash
 ./forge-inspect generate Replica Home
 Creating storage layout diagrams for the following contracts: Replica Home
 ...
@@ -19,8 +19,17 @@ Storage layout snapshot stored at .storage-layout
 
 **Check**
 
-```
+```bash
 ./forge-inspect check Replica Home
 storage-layout test: passes ✅
+```
 
+```bash
+./forge-inspect check BridgeRouter
+storage-layout test: fails ❌
+The following lines are different:
+21c21
+< | xAppConnectionManager | contract XAppConnectionManager | 10  | 0      | 20    | packages/contracts-bridge/contracts/BridgeRouter.sol:BridgeRouter |
+---
+> | xAppConnectionManager | contract XAppConnectionManager | 101  | 0      | 20    | packages/contracts-bridge/contracts/BridgeRouter.sol:BridgeRouter |
 ```
