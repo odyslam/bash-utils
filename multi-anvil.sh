@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-
-source $(dirname "$0")/print-utils.sh
+# shellcheck disable=SC1091
+source "$(dirname "$0")"/print-utils.sh
 set -e
 
 count=$1
@@ -8,7 +8,8 @@ counter=0
 announce "Welcome to Multi Anvil"
 info "Mullti Anvil will generate ${count} anvil instances"
 anvils=""
-for i in $(seq $(($count - 1))); do
+# shellcheck disable=SC2034
+for i in $(seq $((count - 1))); do
   port=$(( 8545 + counter ))
   anvils="${anvils} anvil -p ${port} &"
   info "Anvil instance live at port: ${port}"
