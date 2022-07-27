@@ -4,7 +4,6 @@ set -e
 
 generate() {
   file=$1
-  profile=$2
   if [[ $func == "generate" ]]; then
     echo "Creating storage layout diagrams for the following contracts: $contracts"
     echo "..."
@@ -17,7 +16,7 @@ generate() {
   for contract in ${contracts[@]}
   do
     { echo -e "\n======================="; echo "➡ $contract" ; echo -e "=======================\n"; } >> "$file"
-    FOUNDRY_PROFILE=$profile forge inspect --pretty "$contract" storage-layout >> "$file"
+    forge inspect --pretty "$contract" storage-layout >> "$file"
   done
   if [[ $func == "generate" ]]; then
     echo "Storage layout snapshot stored at $file"
@@ -30,26 +29,15 @@ then
     echo "curl -L https://foundry.paradigm.xyz | bash"
     exit
 fi
+
 # shellcheck disable=SC2124
 contracts="${@:2}"
 func=$1
 filename=.storage-layout
-profile=""
-
-if [[ $(pwd) == *"bridge"* ]]; then
-  profile=bridge
-elif [[ $(pwd) == *"core"* ]]; then
-  profile=core
-else
-  echo "Can't find a Foundry profile for the directory $(pwd)"
-  echo "Aborting.."
-  exit 1
-fi
-
+new_filename=.storage-layout.temp
 
 if [[ $func == "check" ]]; then
-  new_filename=.storage-layout.temp
-  generate $new_filename $profile
+  generate $new_filename
   if ! cmp -s .storage-layout $new_filename ; then
     echo "storage-layout test: fails ❌"
     echo "The following lines are different:"
@@ -62,7 +50,7 @@ if [[ $func == "check" ]]; then
     exit 0
   fi
 elif [[ $func == "generate" ]]; then
-  generate "$filename" "$profile"
+  generate "$filename"
 else
   echo "unknown command. Use 'generate' or 'check' as the first argument."
   exit 1
