@@ -11,7 +11,7 @@ anvils=""
 # shellcheck disable=SC2034
 for i in $(seq $((count - 1))); do
   port=$(( 8545 + counter ))
-  anvils="${anvils} anvil -p ${port} &"
+  anvils="${anvils} anvil -p ${port} -b 1 &"
   info "Anvil instance live at port: ${port}"
   counter=$((counter + 1))
 done
