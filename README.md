@@ -41,6 +41,9 @@ Spin up multiple [Anvil](https://book.getfoundry.sh/anvil/) instances in an inst
 - `CTRL+C` to terminate all of them at once.
 - They spin up with incrementing port numbers, starting from `8545`
 - Useful for multi-chain testing
+- Different instances will get a differently coloured output
+- You can supply RPC endpoints to enter Forking Mode. Simply populate the `rpcs` array in `multi-anvil.json` -- (the RPC endpoints that already exist are PUBLIC)
+- If you use Forking Mode, you will need to supply as many RPC endpoints as the number of Anvil instances you want to spawn
 
 ## print-util.sh
 

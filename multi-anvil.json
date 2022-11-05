@@ -1,0 +1,3 @@
+{
+  "rpcs": ["https://rpc.ankr.com/bsc", "https://rpc.ankr.com/eth"]
+}
