@@ -5,13 +5,13 @@ set -e
 
 
 count=$1
-config="$(dirname $0)/multi-anvil.json"
+config="$(dirname "$0")/multi-anvil.json"
 if [  ! -f config ]; then
   info "Detected config file, parsing..."
-  rpcs=$(cat ${config} | jq ".rpcs")
-  info "Found RPC endpoints"
+  rpcs=$(jq ".rpcs" < "${config}")
+  info "Found RPC endpoints; Entering Forking mode"
   echo "${rpcs}"
-  if [[ ! "$(echo ${rpcs} | jq length)" -eq "${count}" ]]; then
+  if [[ ! "$(echo "${rpcs}" | jq length)" -eq "${count}" ]]; then
     warning "In fork mode, you can't spawn more Anvil instances than the number of RPC endpoints provided in multi-anvil.json"
     warning "Multi Anvil will now exit.."
     exit 1
